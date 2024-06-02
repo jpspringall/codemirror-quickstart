@@ -31,9 +31,10 @@
         const initialState = cm6.createEditorState("function foo() {\n    console.log(123);\n}");
         const view = cm6.createEditorView(initialState, document.getElementById("editor"));
 
-        // Programmatically change editor contents
+        // Programmatically change editor contentscm
         console.log("Before:\n", view.state.doc.toString())
-        view.dispatch({ changes: { from: 0, insert: "// Programmatically add a comment to the first line\n" } })
+        let mySchema = { 'abc.person': ['id', 'name', 'jimmyperson'], 'abc.animal': ['id', 'name', 'jimmyanimal'] };
+        cm6.setAutoComplete(view, mySchema);
         console.log("After:\n", view.state.doc.toString())
     </script>
 </body>
