@@ -68,18 +68,23 @@ function createEditorView(state, parent) {
     return new EditorView({ state, parent });
 }
 
-function createEditorViewFromTextArea(state, textarea) {
-    let view = new EditorView({ state, doc: textarea.value })
-    textarea.parentNode.insertBefore(view.dom, textarea)
+function createEditorViewWithTextArea(state, parent, textarea) {
+    let view = new EditorView({ state, parent })
     textarea.style.display = "none"
-    if (textarea.form) textarea.form.addEventListener("submit", () => {
-        textarea.value = view.state.doc.toString()
-    })
+    if (textarea.form) {
+        console.warn('target has form');
+        textarea.form.addEventListener("submit", () => {
+            textarea.value = view.state.doc.toString()
+        });
+    }
+    else {
+        console.error('target has not form');
+    }
     return view
 }
 
-function editorFromTextArea(textarea, extensions) {
-    let view = new EditorView({ doc: textarea.value, extensions })
+function createEditorViewFromTextArea(state, textarea) {
+    let view = new EditorView({ state, doc: textarea.value })
     textarea.parentNode.insertBefore(view.dom, textarea)
     textarea.style.display = "none"
     if (textarea.form) textarea.form.addEventListener("submit", () => {
@@ -98,5 +103,5 @@ function setAutoComplete(editor, dialectLanguage, autoCompletionList) {
     })
 }
 
-export { createEditorState, createEditorView, createEditorViewFromTextArea, editorFromTextArea, setAutoComplete };
+export { createEditorState, createEditorView, createEditorViewFromTextArea, createEditorViewWithTextArea, setAutoComplete };
 
