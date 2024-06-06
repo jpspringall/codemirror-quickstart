@@ -64,7 +64,7 @@ function createEditorState(initialContents, options = {}) {
 }
 
 function createEditorView(state, parent) {
-    console.log("blah");
+    console.log("blahj");
     return new EditorView({ state, parent });
 }
 
