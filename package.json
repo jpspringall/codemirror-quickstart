@@ -1,12 +1,36 @@
 {
+  "name": "code-mirror-quick-start",
+  "version": "0.0.0",
+  "watch": {
+    "bundle-minify": "src/editor.js",
+    "bundle-minify-copy": "src/editor.js"
+  },
+  "scripts": {
+    "start": "http-server ./ -p 8080",
+    "bundle": "rollup src/editor.js -f iife -o dist/cm6.bundle.js -p @rollup/plugin-node-resolve --output.name cm6",
+    "bundle-minify": "run-s bundle minify",
+    "bundle-minify-copy": "run-s bundle minify copy",
+    "minify": "terser dist/cm6.bundle.js --compress --mangle --output dist/cm6.bundle.min.js",
+    "watch-bundle-minify": "npm-watch bundle-minify",
+    "watch-bundle-minify-copy": "npm-watch bundle-minify-copy",
+    "copy": "xcopy .\\dist\\*.js  \"pathere\" /y"
+  },
+  "private": true,
   "dependencies": {
-    "@codemirror/commands": "^6.1.2",
-    "@codemirror/lang-javascript": "^6.1.1",
-    "@codemirror/search": "^6.2.3",
-    "@codemirror/theme-one-dark": "^6.1.0",
-    "@codemirror/view": "^6.6.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "minify": "^9.1.0",
-    "rollup": "^3.5.1"
+    "@codemirror/commands": "6.5.0",
+    "@codemirror/lang-sql": "6.6.4",
+    "@codemirror/search": "6.5.6",
+    "@codemirror/view": "6.26.3",
+    "@codemirror/theme-one-dark": "6.1.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "15.2.3",
+    "copy-file-util": "1.2.1",
+    "http-server": "14.1.1",
+    "minify": "11.2.0",
+    "npm-run-all2": "6.2.0",
+    "npm-watch": "0.13.0",
+    "rollup": "4.22.5",
+    "terser": "5.31.0"
   }
 }
